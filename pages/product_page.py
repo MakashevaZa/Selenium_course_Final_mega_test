@@ -19,4 +19,6 @@ class ProductPage(BasePage):
         element1 = self.get_text_value(*ProductPageLocators.PRODUCT_PRICE)
         element2 = self.get_text_value(*ProductPageLocators.PRODUCT_PRICE_IN_MESSAGE_ON_NEW_CART_PRICE)
         assert element1 == element2, "Prices differ"
-        
+
+    def should_disappear_success_message(self):
+        assert self.disappeared(*ProductPageLocators.SUCCESS_MESSAGE_ON_ADDING_TO_CART, 4), "The success message of adding a product element doesn't disappear"

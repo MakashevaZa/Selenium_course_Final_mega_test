@@ -1,5 +1,8 @@
 from selenium.common.exceptions import NoSuchElementException
-from selenium.common.exceptions import NoAlertPresentException 
+from selenium.common.exceptions import NoAlertPresentException
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EXCOND
 import math
 
 class BasePage():
@@ -38,3 +41,10 @@ class BasePage():
         except (NoSuchElementException):
             print(f"No \"{what}\" element presented")    
         return element.text.strip()
+
+    def disappeared(self, how, what, timeout=4):
+        try:
+            WebDriverWait(self.browser, timeout, 1, TimeoutException).until_not(EXCOND.presence_of_element_located((how, what)))
+        except TimeoutException:
+            return False
+        return True
