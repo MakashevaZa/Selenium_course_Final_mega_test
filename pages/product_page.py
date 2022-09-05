@@ -13,7 +13,7 @@ class ProductPage(BasePage):
     def should_have_message_the_very_product_was_added(self):
         element1 = self.get_text_value(*ProductPageLocators.PRODUCT_NAME)
         element2 = self.get_text_value(*ProductPageLocators.PRODUCT_NAME_IN_MESSAGE_ON_ADDING)
-        assert element1 == element2, "Product name differ"    
+        assert element1 == element2, "Product names differ"
     
     def should_have_message_with_cart_having_same_price(self):
         element1 = self.get_text_value(*ProductPageLocators.PRODUCT_PRICE)
@@ -22,3 +22,7 @@ class ProductPage(BasePage):
 
     def should_disappear_success_message(self):
         assert self.disappeared(*ProductPageLocators.SUCCESS_MESSAGE_ON_ADDING_TO_CART, 4), "The success message of adding a product element doesn't disappear"
+
+    def should_not_have_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE_ON_ADDING_TO_CART, 4), "The success message of adding a product to cart appeared"
+
